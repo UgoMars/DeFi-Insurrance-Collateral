@@ -30,8 +30,7 @@ contract FactoryInsurance{
         insurancePoolAddresses.push(address(newPool));
     }
 
-    // for loan of $1000 worth of tokens, we needs a colateral of $1500 (1 ether)
-    // colateral Eth price must be above $1000 / eth
+  
     function createColateralPool() external payable {
         uint ethValue = (msg.value * getEthPrice()) / 10 ** 18;
         uint _LoanAmount = (ethValue * (1000 * 10 ** 18)) / 1500;
@@ -57,7 +56,7 @@ contract FactoryInsurance{
     }
 
     function getEthPrice() internal pure returns (uint) {
-        // oracle implementation to get ethPrice
+      
         return 1500;
     }
 }

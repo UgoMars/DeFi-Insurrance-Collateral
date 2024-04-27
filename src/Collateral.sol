@@ -47,11 +47,11 @@ contract Collateral {
     }
 
     function checkCollateralValue() external {
-        // checks that collateral value is checked at most once per month
+       
         if (block.timestamp < lastCollateralCheckTimestamp + 1 days) {
             revert CollateralValueCanBeCheckedOncePerMonth();
         }
-        // Liquidate if the
+       
         bool liquidate = isPriceDropGreaterThan20Percent(
             (getEthPrice() * collateralAmount)
         );
@@ -60,10 +60,10 @@ contract Collateral {
             loanLiquidated = true;
         }
 
-        // Update the timestamp of the last collateral check
+       
         lastCollateralCheckTimestamp = block.timestamp;
 
-        // Emit an event to record the collateral check
+       
         emit CollateralCheck(owner, getEthPrice());
     }
 
@@ -89,7 +89,7 @@ contract Collateral {
     }
 
     function getEthPrice() internal pure returns (uint) {
-        // oracle implementation to get ethPrice
+       
         return 1500;
     }
 
@@ -97,11 +97,11 @@ contract Collateral {
         uint256 currentPrice
     ) public view returns (bool) {
         uint initialCollateralPrice = (loanAmount * 1500) / (1000 * 10 ** 18);
-        // Calculate the price drop percentage
+       
         uint256 priceDropPercentage = ((initialCollateralPrice - currentPrice) *
             100) / initialCollateralPrice;
 
-        // Check if the price has dropped by 20% or more
+        
         return priceDropPercentage >= 20;
     }
 
